@@ -50,13 +50,15 @@ var app = {
 };
 
 function _ibeacon() {
-    alert('ibeacon: ' + typeof ibeacon);
+    console.log('ibeacon: ' + typeof ibeacon);
 
     ibeacon.identifier = 'my-unique-identifier';
 
     var region = new ibeacon.Region({
         uuid: '8B034F7B-FA9B-540F-ACF3-88C0CA70C84F'
     });
+
+    ibeacon.region = region;
 
     console.log(region.identifier); // 'my-unique-identifier'
 
@@ -71,7 +73,7 @@ function _ibeacon() {
     ibeacon.startRangingBeaconsInRegion({
       region: region,
       didRangeBeacons: function(result) {
-        console.log('I see ' + result.beacons.length + ' beacons');
+        console.log(result);
       }
     });
 }
