@@ -34,7 +34,7 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
-        ibeacon();
+        _ibeacon();
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -49,7 +49,7 @@ var app = {
     }
 };
 
-function ibeacon() {
+function _ibeacon() {
     alert('ibeacon: ' + typeof ibeacon);
 
     ibeacon.identifier = 'my-unique-identifier';
@@ -63,16 +63,15 @@ function ibeacon() {
     ibeacon.startMonitoringForRegion({
       region: region,
       didDetermineState: function(result) {
-        if (result.state === 'inside') console.log('I see you!')
+        if (result.state === 'inside') console.log('I see you!');
         else console.log('Where are you?');
       }
     });
 
-    ibeacon.startMonitoringForRegion({
+    ibeacon.startRangingBeaconsInRegion({
       region: region,
-      didDetermineState: function(result) {
-        if (result.state === 'inside') console.log('I see you!')
-        else console.log('Where are you?');
+      didRangeBeacons: function(result) {
+        console.log('I see ' + result.beacons.length + ' beacons');
       }
-    });   
+    });
 }
